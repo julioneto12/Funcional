@@ -58,6 +58,11 @@ cont n (x:xs)
  | n == x = 1 + cont n xs
  | otherwise = cont n xs
 
+----- questao 11 --- retornar os valores maiores que x
+maioresque :: Int -> [Int] -> [Int]
+maioresque _ [] = []
+maioresque y xs = [x | x <- xs, x>y]
+
 ---- questao 12 ---- concatenacao entre lista a e b
 concatena :: [a] -> [a] -> [a]
 concatena [] [] = []
@@ -73,16 +78,34 @@ corpo :: [a] -> [a]
 corpo [] = []
 corpo x = init x
 
+---- questao 15 ---- remove as repeticoes de elementos
+unique :: [Int] -> [Int]
+unique [] = []
+unique (x:xs) = if elem x (unique xs) 
+                    then unique xs
+                    else x:unique xs
+
 ---- questao 18 ---- reverso da lista [1,2,3] -> [3,2,1]
 reverso :: [Int] -> [Int]
 reverso [] = []
 reverso (x:xs) = (reverso xs) ++ [x]
+
+---- questao 20 ---- intercalacao entre lista a e b
+intercala :: [a] -> [a] -> [a]
+intercala [] [] = []
+intercala [] [x] = [x]
+intercala [x] [] = [x]
+intercala (x:xs) (y:ys) = x:y:intercala xs ys
 
 ----- questao 23 ----- n e m e retorna uma lista com n termos a partir de m
 sequencia :: Int -> Int -> [Int]
 sequencia 0 _ = []
 sequencia n x = [x+i | i <- [0..n-1]]
 
+----- questao 25 ----- 
+isSorted :: [Int] -> Bool
+isSorted [x] = True
+isSorted (x:xs) = if x > head xs then False else isSorted xs
 
 ----- questao 32 ----- receber uma string e dizer se eh palindromo
 isPalind :: String -> Bool
